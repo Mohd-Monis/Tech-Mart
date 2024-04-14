@@ -1,0 +1,8 @@
+h1,p,h3{
+    text-align: center;
+    color: var(--peach) !important;
+}
+
+p{
+    font-size: 1.5rem;
+}

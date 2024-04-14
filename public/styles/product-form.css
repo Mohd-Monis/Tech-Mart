@@ -1,0 +1,34 @@
+.image-upload{
+   
+    display: flex;
+    justify-content: left;
+}
+
+.image-upload{
+    height: auto;
+}
+
+.image-upload div{
+    height:auto;
+}
+
+#product-image{
+    width: auto;
+}
+
+.image-upload input{
+    width: 13rem !important;
+}
+
+.image-upload img{
+    display: none;
+    height: 5rem;
+}
+
+form{
+    display: inline;
+}
+
+form button{
+    display: inline;
+}

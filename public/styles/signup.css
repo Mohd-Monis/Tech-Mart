@@ -1,0 +1,49 @@
+.card{
+    margin-top: 3rem;
+    width: 44rem;
+    position: relative;
+    z-index: 0;
+}
+
+.card__content{
+    width: 42;
+}
+
+.card__content label{
+    font-size: 1.2rem;
+}
+
+.card__content input{
+    font-size: 1rem;
+    margin-bottom: 0.5rem !important;
+    width: 40rem;
+}
+
+.card__content label{
+    margin-top: 0.5rem !important;
+}
+
+.Invalid{
+    background-color: rgb(221, 55, 55);
+    width: 100%;
+    padding: 0.5rem;
+    padding-left: 1rem;
+    border-radius: 5px;
+}
+
+.Invalid p{
+    color: rgb(245, 203, 203) ;
+    font-size: 1rem;
+}
+
+@media (max-width: 704px) {
+    .card{
+        width: 95%;
+    }
+    .card__content{
+        width: 100%;
+    }
+    .card__content input{
+        width: 98%;
+    }
+}

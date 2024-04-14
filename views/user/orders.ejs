@@ -1,0 +1,72 @@
+<%-include("../includes/head") %>
+    <link rel="stylesheet" href="/styles/landing.css">
+    <link rel="stylesheet" href="/styles/productlist.css">
+    <link rel="stylesheet" href="/styles/orders.css">
+    <link rel="stylesheet" href="/styles/cart.css">
+    <% if(isAdmin) { %>
+        <script src="/scripts/delete.js" defer></script>
+        <%}%>
+            <script src="/scripts/updateCart.js" defer></script>
+            </head>
+
+            <%-include("../includes/header") %>
+                <main>
+                    <div class="card">
+                        <h2>All your Orders</h2>
+                       <% for(order of Orders) { %>
+                            <div class="card__content row g-0">
+                                <h4>date: <%= order.date.toLocaleDateString('en-US',{
+                                    hour:"numeric",
+                                    minute:"numeric",
+                                    second:"numeric",
+                                    day:"numeric",
+                                    month:"long",
+                                    year:"numeric"
+                                }) %></h4>
+                                <h4>Status: <%=order.deliveryStatus%></h4>
+                                <% for(Product of order.cart.products){ %>
+                                    <div class="cart-item">
+                                        <div class="col-md-4">
+                                            <img src="../<%=Product.actualProduct.imageUrl%>" alt="Image">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card-body">
+                                                <ul>
+                                                    <li>
+                                                        <h3>
+                                                            <%=Product.actualProduct.name%>
+                                                        </h3>
+                                                    </li>
+                                                    <li>
+                                                        <p>
+                                                            <%=Product.actualProduct.summary%>
+                                                        </p>
+                                                    </li>
+                                                    <div class="space"></div>
+                                                    <li>
+                                                        <p>
+                                                            Price per item: <%= Product.actualProduct.price%> rupees
+                                                        </p>
+                                                    </li>
+                                                    <li>
+                                                        <p>
+                                                            Quantity: <em
+                                                                id="product-num-<%=Product.actualProduct._id%>">
+                                                                <%=Product.number%>
+                                                            </em> 
+                                                        </p>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <% } %>
+                                <h4>Total Price: <em id="totalPrice">
+                                    <%=order.cart.total%>
+                                    </em> rupees
+                                </h4>
+                                </div>
+                            <% } %>
+                        </div>
+                    </div>
+                </main>

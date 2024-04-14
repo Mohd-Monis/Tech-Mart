@@ -1,0 +1,23 @@
+.card__content{
+    margin: 0.2rem;
+}
+
+h2{
+    text-align: center;
+}
+
+p{
+    font-size: 1rem;
+}
+
+.status-form{
+    display: flex;
+    align-items: center;
+    height: 4rem;
+}
+
+.status{
+    height: 3rem;
+    font-size: 1.2rem;
+}
+

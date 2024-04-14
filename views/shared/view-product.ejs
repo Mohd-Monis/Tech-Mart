@@ -1,0 +1,32 @@
+<%- include("../includes/head") %>
+<link rel="stylesheet" href="../styles/style.css">
+<link rel="stylesheet" href="../styles/landing.css">
+<link rel="stylesheet" href="../styles/product.css">
+<% if(isAuth && !isAdmin) { %>
+    <script src="/scripts/addCart.js" defer></script>
+<%}%>
+</head>
+<%- include("../includes/header") %>
+<main>
+    <div class="card">
+        <div class="card__content">
+            <h2>
+                <%=Product.name%>
+            </h2>
+            <div class="row">
+                <img src="../<%=Product.imageUrl%>" alt="<%=Product.title%>">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <p>
+                        <%=Product.description%>
+                    </p>
+                    <h4><%= Product.price%> rupees</h4>
+                </div>
+                <% if(!isAdmin) {%>
+                    <button  class="btn btn-primary addCart" data-productId="<%=Product._id%>" data-csrfToken="<%=csrfToken%>"> Add to Cart</button>
+                <%} %>
+            </div>
+        </div>
+    </div>
+</main>

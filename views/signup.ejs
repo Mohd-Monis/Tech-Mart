@@ -1,0 +1,64 @@
+<%-include("includes/head")%>
+    <link rel="stylesheet" href="styles/landing.css">
+    <link rel="stylesheet" href="styles/signup.css">
+</head>
+
+<body>
+    <%-include("includes/header") %>
+        <div class="card">
+            <div class="card__content">
+                <% if(input.hasError){ %>
+                    <div class="Invalid">
+                        <h2>Invalid data</h2>
+                        <p>please enter valid input credentials</p>
+                    </div>
+                <% } %>
+                <form action="/signup" method="post">
+                        <input type="hidden" value="<%= csrfToken%>" name="_csrf">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" placeholder="name" name="name"
+                                value="<%=input.name%>">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1"
+                                aria-describedby="emailHelp" placeholder="Enter email" name="email"
+                                value="<%=input.email%>">
+                        </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Password</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1"
+                                    placeholder="Password" name="password" minlength="6" value="<%= input.password%>">
+                            </div>
+                            <div class="form-group">
+                                <label for="street">Street</label>
+                                <input type="text" class="form-control" id="street" placeholder="street" name="street"
+                                    value="<%=input.street%>">
+                            </div>
+                            <div class="form-group">
+                                <label for="postal-code">Postal Code</label>
+                                <input type="text" class="form-control" id="postal-code" placeholder="postal code"
+                                    name="postalCode" value="<%=input.postalCode%>">
+                            </div>
+                            <div class="form-group">
+                                <label for="city">City</label>
+                                <input type="text" class="form-control" id="city" placeholder="city" name="city"
+                                    value="<%=input.city%>">
+                            </div>
+                            <div class="form-group">
+                                <label for="country">Country</label>
+                                <input type="text" class="form-control" id="country" placeholder="country"
+                                    name="country" value="<%=input.country%>">
+                            </div>
+                            <!-- <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            </div> -->
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+            </div>
+        </div>
+</body>
+
+</html>

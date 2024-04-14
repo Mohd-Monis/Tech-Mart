@@ -1,0 +1,25 @@
+.card{
+    width: 40rem;
+}
+
+.card__content{
+    width: 100%;
+}
+
+.card__content img{
+    width: 100%;
+    padding: 0;
+}
+
+.card-body{
+    padding: 0 !important;
+}
+
+.col-md-8{
+    padding: 0 !important;
+}
+
+.row{
+    width: 100% !important;
+}
+

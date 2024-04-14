@@ -1,0 +1,50 @@
+.card{
+    width: auto !important;
+    margin: 2rem 20%;
+}
+
+.card__content{
+    width: auto !important;
+}
+
+
+.g-0{
+    width: auto !important;
+    padding-bottom: 0 !important;
+}
+.card__content img{
+    width: 100%;
+}
+
+
+.card-body a{
+    height: 1.3rem;
+    background-color: rgb(64, 19, 106);
+    text-decoration: none;
+    color: var(--peach);
+}
+
+.card-body .btn-primary{
+    height: 3rem;
+    font-size: 1.5rem;
+    margin-right: .5rem;
+}
+
+.card__content{
+    padding-bottom: 1rem !important;
+}
+
+.card-body{
+    padding-top: 0 !important;
+    width:  auto !important;
+    margin: auto !important;
+}
+
+.card-body h4{
+    height: 13rem;
+}
+
+#controls{
+    display: flex;
+    
+}
