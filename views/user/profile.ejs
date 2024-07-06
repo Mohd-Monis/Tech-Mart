@@ -1,0 +1,51 @@
+<%-include("../includes/head")%>
+    <link rel="stylesheet" href="styles/landing.css">
+    <link rel="stylesheet" href="styles/signup.css">
+    </head>
+    <style>
+        footer{
+            margin-top: 3rem !important;
+            top: 3rem !important;
+        }
+    </style>
+    <body>
+        <%-include("../includes/header") %>
+            <main>
+
+                <div class="card" style="width: 50rem; margin: 2rem auto;">
+                    <form action="profile/edit" method="post">
+                        <h5 style="text-align: center;">Address</h5>
+                        <input type="hidden" value="<%= csrfToken%>" name="_csrf">
+
+                        <div class="form-group">
+                            <label for="street">Street</label>
+                            <input type="text" class="form-control" id="street" placeholder="street" name="street"
+                                value="<%=user.address.line1%>">
+                        </div>
+                        <div class="form-group">
+                            <label for="postal-code">Postal Code</label>
+                            <input type="text" class="form-control" id="postal-code" placeholder="postal code"
+                                name="postal_code" value="<%=user.address.postal_code%>">
+                        </div>
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <input type="text" class="form-control" id="city" placeholder="city" name="city"
+                                value="<%=user.address.city%>">
+                        </div>
+                        <div class="form-group">
+                            <label for="country">Country</label>
+                            <input type="text" class="form-control" id="country" placeholder="country" name="country"
+                                value="<%=user.address.country%>">
+                        </div>
+                        <!-- <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            </div> -->
+                        <button type="submit" class="btn btn-primary">Edit</button>
+                    </form>
+                </div>
+            </main>
+
+            </html>
+            <%-include("../includes/footer")%>
+    </body>

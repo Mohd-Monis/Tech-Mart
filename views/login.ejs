@@ -2,15 +2,21 @@
     <link rel="stylesheet" href="styles/landing.css">
 </head>
 
+<style>
+    footer{
+        position: relative;
+        top: 5.5rem;
+    
+    }
+</style>
+
 <body>
     <%- include("includes/header") %>
-    <div class="card">
-        <div class="card__content">
-           
+    <div class="card">           
             <h1>Login</h1>
             <% if(input.hasError) { %>
                 <div class="Invalid">
-                    <h2>Invalid data</h2>
+                    <h5>Invalid data</h5>
                     <p>please enter valid input credentials</p>
                 </div>
             <% } %>
@@ -31,8 +37,7 @@
             </div> -->
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
-        </div>
     </div>
+    <%-include("includes/footer")%>
 </body>
-
 </html>

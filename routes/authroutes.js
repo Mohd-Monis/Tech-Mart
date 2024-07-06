@@ -21,6 +21,7 @@ router.get('/view-products',control.viewProduct);
 
 router.get('/view/:id',control.viewSingleProduct)
 
+router.get("/products/search",control.search);
 
 router.get("/logout",control.logout)
 

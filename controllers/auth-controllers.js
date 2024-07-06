@@ -41,7 +41,7 @@ async function getSignUp(req, res) {
 }
 async function postSignUp(req, res) {
     const data = req.body
-    if (! await checkSignUpInput(data.name,data.email,data.password,data.street,data.postalCode,data.city,data.country)) {
+    if (! await checkSignUpInput(data.name,data.email,data.password,data.street,data.postal_code,data.city,data.country)) {
         const body = req.body;
         try{
             await addErrorFlag(req, {
@@ -51,7 +51,7 @@ async function postSignUp(req, res) {
                 street:  body.street,
                 city:body.city,
                 country: body.country,
-                postalCode:body.postalCode,
+                postal_code:body.postal_code,
                 password: body.password
                 
             },
@@ -71,8 +71,8 @@ async function postSignUp(req, res) {
     },
         async function () {
             const user = new User(req.body.name, req.body.email, req.body.password, {
-                street:req.body.street,
-                postalCode:req.body.postalCode,
+                line1 :req.body.street,
+                postal_code:req.body.postal_code,
                 city:req.body.city,
                 country:req.body.country
             });
@@ -115,6 +115,11 @@ async function viewSingleProduct(req,res){
 
 }
 
+async function search(req,res){
+    const Products =  await Product.fetchFilter(req.query.prefix);
+    res.render("shared/products",{ Products: Products , csrfToken: req.csrfToken()});
+}
+
 module.exports = {
     getHome:getHome,
     getLogIn:getLogIn,
@@ -124,4 +129,5 @@ module.exports = {
     logout: logout,
     viewProduct:viewProduct,
     viewSingleProduct:viewSingleProduct,
+    search : search
 }

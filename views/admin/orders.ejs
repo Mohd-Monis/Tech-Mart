@@ -3,83 +3,132 @@
     <link rel="stylesheet" href="/styles/productlist.css">
     <link rel="stylesheet" href="/styles/orders.css">
     <link rel="stylesheet" href="/styles/cart.css">
+    <style>
+        .field-value{
+            display: flex;
+        }
+    </style>
     <% if(isAdmin) { %>
         <script src="/scripts/update-status.js" defer></script>
         <%}%>
             <script src="/scripts/updateCart.js" defer></script>
             </head>
 
-            <%-include("../includes/header") %>
-                <main>
-                    <div class="card">
-                        <h2>All Orders</h2>
-                       <% for(order of Orders) { %>
-                            <div class="card__content row g-0">
-                                <h5>Username: <%=order.user.name%></h5>
-                                <h5>date: <%= order.date.toLocaleDateString('en-US',{
-                                    hour:"numeric",
-                                    minute:"numeric",
-                                    second:"numeric",
-                                    day:"numeric",
-                                    month:"long",
-                                    year:"numeric"
-                                }) %></h5>
-                                <h5>email: <%=order.user.email%></h5>
-                                <h5>Address: </h5>
-                                <p>
-                                    <%=order.user.address.street%>,<%=order.user.address.city%>-<%=order.user.address.postalCode%>,<%=order.user.address.country%>
-                                </p>
-                                <h5 >Status: <span class="StatusValue"><%=order.deliveryStatus%></span></h5>
-                                <form class="status-form" data-orderid="<%=order._id%>" data-csrfToken="<%=csrfToken%>">
-                                    <select name="status" class="status" value="<%=order.deliveryStatus%>">
-                                        <option value="Delivered">Delivered</option>
-                                        <option value="Not Delivered">Not Delivered</option>
-                                    </select>
-                                    <button class="btn btn-primary">Update</button>
-                                </form>
-                                <% for(Product of order.cart.products){ %>
-                                    <div class="cart-item">
-                                        <div class="col-md-4">
-                                            <img src="../<%=Product.actualProduct.imageUrl%>" alt="Image">
+            <body>
+                <%-include("../includes/header") %>
+                    <main style="margin-bottom: 5rem;">
+                        <div>
+                            <h2 style="margin-top: 2rem !important;">All Orders</h2>
+                           <% for(order of Orders) { %>
+                            <div class="card" style="width: 45rem; margin-top: 1.4rem; margin-bottom: 0rem;">
+                                <div class="user-details" style="display: flex; flex-direction: column;">
+                                    <div class="field-value">
+                                        <div class="fields" style="width: 40%;">
+                                            <h5>Username</h5>
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="card-body">
-                                                <ul>
-                                                    <li>
-                                                        <h3>
-                                                            <%=Product.actualProduct.name%>
-                                                        </h3>
-                                                    </li>
-                                                    <li>
-                                                        <p>
-                                                            <%=Product.actualProduct.summary%>
-                                                        </p>
-                                                    </li>
-                                                    <div class="space"></div>
-                                                    <li>
-                                                        <p>
-                                                            Price per item: <%= Product.actualProduct.price%> rupees
-                                                        </p>
-                                                    </li>
-                                                    <li>
-                                                        <p>
-                                                            Quantity: <em
-                                                                id="product-num-<%=Product.actualProduct._id%>">
-                                                                <%=Product.number%>
-                                                            </em> 
-                                                        </p>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                        <div class="values">
+                                            <p>
+                                                <%=order.user.name%>
+                                            </p>
+                                            
                                         </div>
                                     </div>
-                                <% } %>
-                                <h4>Total Price: <em id="totalPrice">
-                                    <%=order.cart.total%>
-                                    </em> rupees
-                                </h4>
+
+                                    <div class="field-value">
+
+                                        <div class="fields" style="width: 40%;">
+                                            <h5>Date</h5>
+                                        </div>
+                                        <div class="values">
+                                            <p>
+                                                <%= order.date.toLocaleDateString('en-US',{
+                                                    hour:"numeric",
+                                                    minute:"numeric",
+                                                    second:"numeric",
+                                                    day:"numeric",
+                                                    month:"long",
+                                                    year:"numeric"
+                                                }) %>
+                                                </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="field-value">
+                                        <div class="fields" style="width: 40%;">
+                                            <h5>Email</h5>
+                                        </div>
+                                        <div class="values">
+                                            <p><%=order.user.email%></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="field-value">
+                                        <div class="fields" style="width: 40%;">
+                                            <h5>Address</h5>
+                                        </div>
+                                        <div class="values">
+                                            <p> <%=order.user.address.street%>,<%=order.user.address.city%>-<%=order.user.address.postalCode%>,<%=order.user.address.country%></p>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="field-value">
+                                        <div class="fields" style="width: 40%;">
+                                            <h5 >Status</h5>
+                                        </div>
+                                        <div class="values">
+                                            <p class="StatusValue"><%=order.deliveryStatus%></p>
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                
+                                <form class="status-form" data-orderid="<%=order._id%>" data-csrfToken="<%=csrfToken%>">
+                                        
+                                        <select name="status" class="status" value="<%=order.deliveryStatus%>">
+                                            <option value="Delivered">Delivered</option>
+                                            <option value="Not Delivered">Not Delivered</option>
+                                        </select>
+                                        <button class="btn btn-primary status-button" style="border: 1px solid rgb(99, 51, 57) !important;">Update</button>
+                                    </form>
+                                    <% for(Product of order.cart.products){ %>
+                                        <div class="cart-item" style="list-style-type: none; display: flex; padding-top: 1rem;  padding-bottom: 2rem; border-top: 1px solid  black; border-bottom: 0px !important;">
+                                            <div style="width: 38%; padding-right: 1rem;">
+                                                <img src="../<%=Product.actualProduct.imageUrl%>" alt="Image" style="height: 9.5rem;">
+                                            </div>
+                                            <div class="product-details" style="padding-left: 0;" >
+                                                   
+                                                    <ul style="list-style-type: none; padding: 0;">
+                                                        <li>
+                                                            <h4 style="color: rgb(88, 84, 84);" class="product-name">
+                                                                <%=Product.actualProduct.name.toUpperCase()%>
+                                                            </h4>
+                                                        </li>
+                                                        <!-- <div class="space"></div> -->
+                                                        <li>
+                                                            <p>
+                                                                Price per item: ₹ <%= Product.actualProduct.price%>
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>
+                                                                Quantity: <%=Product.number%>
+                                                                
+                                                            </p>
+                                                            <h5>Total Price:
+                                                                ₹ <%=order.cart.total%>
+                                                                
+                                                            </h5>
+                                                        </li>
+                                                    </ul>
+                                        
+                                            </div>
+                                        </div>
+                                    <% } %>
                             </div>
-                        <% } %>
+                            <% } %>
+                        </div>
                     </div>
-                </div>
-            </main>
+                </main>
+                <%-include("../includes/footer")%>
+            </body>

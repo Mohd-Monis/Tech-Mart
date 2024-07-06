@@ -7,7 +7,9 @@ async function updateStatus(event){
     let data = event.target.dataset;
     let csrf = data.csrftoken;
     let orderid = data.orderid;
-    let status = event.target.querySelector("select").value
+    let status = event.target.querySelector("select").value;
+    console.log("data is: ")
+    console.log(data)
     console.log("child selected is: ")
     console.log(event.target.querySelector("select"))
     console.log("target status is: ")

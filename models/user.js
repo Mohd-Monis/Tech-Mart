@@ -3,6 +3,7 @@ const mongodb = require("mongodb");
 const ObjectId = mongodb.ObjectId;
 const getDb = require('../data/database');
 const Cart = require('./cart');
+const stripe = require('stripe')('sk_test_51OYrXGSIIvhxXi32kqD6dl9NfO36bNQtwaKqjnvL3ahtjGAt4oQuYrPuGXyW3XT11uVEyberwpy9JY1ZkTGKiPj200qHx9N2pV');
 
 class User {
     constructor(name, email, password, address, id) {
@@ -16,6 +17,7 @@ class User {
     }
     static async checkUser(email, password) {
         const user = await getDb().collection("Users").findOne({ email: email });
+        console.log(user);
         if (user && await bcrypt.compare(password, user.password)) return true;
         return false;
     }
@@ -29,8 +31,14 @@ class User {
     }
 
     async save() {
+        const customer = await stripe.customers.create({
+            name : this.name,
+            address : this.address,
+            email : this.email, 
+        })
         await getDb().collection("Users").insertOne({
             name: this.name,
+            stripe_id : customer.id,
             email: this.email,
             password: await bcrypt.hash(this.password, 3),
             address: this.address,
@@ -38,10 +46,14 @@ class User {
         })
     }
 
-    async edit(data) {
-        await getDb().collection("Users").updateOne(
-            { _id: this.id }, { $set: data }
-        )
+    async edit() {
+        const customer = await stripe.customers.create({
+            name : this.name,
+            address : this.address,
+            email : this.email, 
+        })
+        console.log("inside edit!!");
+        await getDb().collection("Users").updateOne({_id: this.id},{ $set: {address:this.address, stripe_id : customer.id}});
     };
 
     async addProductInCart(id){

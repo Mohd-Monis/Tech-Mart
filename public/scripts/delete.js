@@ -1,4 +1,7 @@
-const deleteButtons = document.querySelectorAll("#controls button");
+const deleteButtons = document.querySelectorAll(".delete");
+
+console.log("list of items delete button")
+console.log(deleteButtons)
 async function deleteProduct(event){
     const button = event.target;
     const productId = button.dataset.productid;

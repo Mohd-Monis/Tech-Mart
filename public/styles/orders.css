@@ -7,7 +7,12 @@ h2{
 }
 
 p{
-    font-size: 1rem;
+    font-size: 1.1rem;
+}
+
+.fields h5{
+    margin-bottom: 1.2rem;
+    width: 18rem;
 }
 
 .status-form{
@@ -17,7 +22,21 @@ p{
 }
 
 .status{
-    height: 3rem;
+    height: 2.3rem;
     font-size: 1.2rem;
 }
+
+.status-button{
+    border-radius: 0px 5px 5px 0px !important;
+}
+
+.status-button:focus{
+    box-shadow: 0 !important;
+    border: 0 !important;
+}
+
+.product-details{
+    padding-left: 1rem;
+}
+
 

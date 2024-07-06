@@ -1,10 +1,91 @@
 <%-include("includes/head") %>
+<link rel="stylesheet" href="styles/landing.css">
+<style>
+    .button {
+ --color: rgb(65,48,48); 
+ padding: 0.8em 1.7em;
+ background-color: transparent;
+ border-radius: .3em;
+ position: relative;
+ overflow: hidden;
+ cursor: pointer;
+ transition: .5s;
+ font-weight: 500;
+ font-size: 17px;
+ border: 2px solid;
+ font-family: inherit;
+ text-transform: uppercase;
+ color: var(--color) ;
+
+ z-index: 1;
+ top: 9rem;
+ }
+
+ footer{
+    position: relative;
+    top: 3rem;
+}
+
+.button::before, .button::after {
+ content: '';
+ display: block;
+ width: 50px;
+ height: 50px;
+ transform: translate(-50%, -50%);
+ position: absolute;
+ border-radius: 50%;
+ z-index: -1;
+ background-color: var(--color);
+ transition: 1s ease;
+}
+
+.button::before {
+ top: -1em;
+ left: -1em;
+}
+
+.button::after {
+ left: calc(100% + 1em);
+ top: calc(100% + 1em);
+}
+
+.button:hover::before, .button:hover::after {
+ height: 410px;
+ width: 410px;
+ color: white;
+}
+
+.button:hover {
+ color: white;
+}
+
+.button:active {
+ filter: brightness(.8);
+}
+
+</style>
 <title>Home</title>
 </head>
 <body>
     <%-include("includes/header") %>
     <%if(isAdmin) {%>
-        <h1>Admin</h1>
+        <main>
+            <h1 style="text-align: center;">Admin</h1>
+            </main>
+    <%}else{%>
+        <main  class="home" style="display: flex; height: 35rem !important;">
+            <div class="home-content" style="width: 50%;">
+                <h1 style="font-size: 3.5rem; position: relative ; top: 8rem;  margin-left: 5%; text-align: center;" class="love">Lots to love.</h1>
+                <h1 style="font-size: 3.5rem ;position: relative ; top: 8rem;margin-left: 4.5%; text-align: center;" class="spend">Less to spend.</h1>
+                <!-- <button style="border-radius: 25%; border: 4px solid black; background-color: white; font-size: 2rem;">Explore</button> -->
+                <button class="button" onclick="location.href='/view-products'" style="display: block; margin: auto;">Explore
+                </button>
+            </div>
+            <div class="home-image" style="background-image: url('/images/landing.png'); background-repeat: no-repeat; background-position: center;background-size: cover; width: 50%;" ></div>
+        </main>
     <%}%>
+
+    
+    <%-include("includes/footer")%>
 </body>
 </html>

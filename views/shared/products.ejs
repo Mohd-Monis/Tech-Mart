@@ -1,51 +1,52 @@
 <%-include("../includes/head") %>
     <link rel="stylesheet" href="/styles/landing.css">
     <link rel="stylesheet" href="/styles/productlist.css">
+    <link rel="stylesheet" href="/styles/product.css">
     <% if(isAdmin) { %>
         <script src="/scripts/delete.js" defer></script>
     <%}%>
     <% if(isAuth && !isAdmin) { %>
         <script src="/scripts/addCart.js" defer></script>
     <%}%>
-    
-    </head>
+</head>
 
-    <%-include("../includes/header") %>
+<%-include("../includes/header") %>
 
-        <main>
-            <% for(Product of Products) { %>
-                <div class="card card<%=Product._id%>">
-                
-                    <div class="card__content row g-0">
-                        <h2>
-                            <%=Product.name%> 
-                        </h2>
-                        <div class="col-md-4">
-                            <img src="<%=Product.imageUrl%>" alt="<%=Product.title%>">
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card-body">
-                                <h3>
-                                    <%=Product.summary%>
-                                </h3>
-                                <h4>
-                                    <%= Product.price%> rupees
-                                </h4>
-
-                                <div id="controls">
-                                    <a href="/view/<%=Product._id.toString()%>" class="btn btn-primary">View</a>
-                                    <% if(isAdmin){ %>
-                                        <a href="/admin/edit/<%=Product._id.toString()%>" class="btn btn-primary">Edit</a>
-                                            <button data-productID="<%=Product._id.toString()%>" data-csrfToken="<%=csrfToken%>" class="btn btn-primary">
-                                                Delete
-                                            </button>
-                                    <% }else { %>
-                                            <button  class="btn btn-primary addCart" data-productId="<%=Product._id%>" data-csrfToken="<%=csrfToken%>"> Add to Cart</button>
+<main>
+    <% for (let i=0; i < Products.length; i+=4) {%>
+        <div class="row_">
+        <% for(let j = 0; j < 4 && i + j < Products.length; j++) { %>
+                <% let Product = Products[i+j]%>
+                <div class="Card card<%=Product._id%>" style="width: 18rem;">
+                    <div class="img-container" style="background-image: url('../<%=Product.imageUrl%>'); height: 15rem; background-repeat: no-repeat; background-size: contain;background-position: center; border-radius: 10px;">
+                        <!-- <img src="" class="card-img" alt="<%=Product.title%>"> -->
+                    </div>
+                    <div class="card-content">
+                        <h5 class="card-title"><%=Product.name%></h5>
+                        <!-- <p class="card-text"><%=Product.summary%></p> -->
+                        <h6 class="card-title" style="font-size: 1.3rem;">₹ <%= Product.price%></h6>
+                        <div id="controls">
+                            <a href="/view/<%=Product._id.toString()%>"
+                                class="btn btn-primary">View</a>
+                            <% if(isAdmin){ %>
+                                <a href="/admin/edit/<%=Product._id.toString()%>"
+                                    class="btn btn-primary">Edit</a>
+                                <button data-productID="<%=Product._id.toString()%>"
+                                    data-csrfToken="<%=csrfToken%>" class="btn btn-primary delete">
+                                    Delete
+                                </button>
+                                <% }else { %>
+                                    <button class="btn btn-primary addCart"
+                                        data-productId="<%=Product._id%>"
+                                        data-csrfToken="<%=csrfToken%>" style="width: 9rem;"> Add to Cart</button>
                                     <%}%>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
-                <% } %>
-        </main>
+            <% } %>
+    </div>
+    <% } %>
+</main>
+
+<%-include("../includes/footer")%>
+                    

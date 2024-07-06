@@ -1,78 +1,125 @@
 <header>
-        <nav class="navbar-expand-lg navbar">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="#"><img src="/images/bag.jpg" alt="bag" class="bag"></a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <nav class="navbar-expand-lg navbar space-nav">
+        <div class="container-fluid">
+            <!-- <a class="navbar-brand" href="#"><img src="/images/logo.jpg" alt="bag" class="bag"></a> -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <% if(!isAuth) {%>
-                    <li class = "nav-item">
-                        <a href="/signup" class="nav-link">Sign up</a>
-                    </li>
-                    <% }%>
-                    <% if(!isAuth) {%>
-                    <li class = "nav-item">
-                        <a href="/login" class="nav-link">Log in</a>
-                    </li>
-                    <% }%>
-                    <% if(isAuth && !isAdmin) {%>
-                    <li class = "nav-item">
-                        <a href="" class="nav-link">Contact us</a>
-                    </li>
-                    <% }%>
-                    <% if(isAuth && !isAdmin) {%>
-                    <li class = "nav-item">
-                        <a href="" class="nav-link">Browse Products</a>
-                    </li>
-                    <% }%>
-                    <% if(isAuth && !isAdmin) {%>
-                    <% }%>
-                    <% if(isAdmin) {%>
-                    <li class = "nav-item">
-                        <a href="" class="nav-link">View Orders</a>
-                    </li>
-                    <% }%>
-                    <% if(isAuth) {%>
-                    <li class = "nav-item">
-                        <a href="/view-products" class="nav-link">View Products</a>
-                    </li>
-                    <% }%>
-                    <% if(isAdmin) {%>
-                        <li class = "nav-item">
-                            <a href="/admin/add-product" class="nav-link">Add Product</a>
-                        </li>
-                        <% }%>
-                    <% if(isAdmin) {%>
-                        <li class = "nav-item">
-                        <a href="/admin/orders" class="nav-link">View Orders</a>
-                    </li>
-                    <% }%>
-                    <% if(isAuth) {%>
-                    <li class = "nav-item">
-                        <a href="/logout" class="nav-link">Log Out</a>
-                    </li>
-                    <% }%>
-                </ul>
-                <li class = "nav-item cart-li">
-                    <a href="/user/cart" class="cart-link">
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 Navbar">
+                    <ul class="navbar-nav left-nav" style="width: 33%;">
+                        <% if(!isAuth) {%>
+                            <li class="nav-item">
+                                <a href="/signup" class="nav-link">Sign up</a>
+                            </li>
+                            <% }%>
+                                <% if(!isAuth) {%>
+                                    <li class="nav-item">
+                                        <a href="/login" class="nav-link">Log in</a>
+                                    </li>
+                                    <% }%>
+                                                <% if(isAuth && !isAdmin) {%>
+                                                    <li class="nav-item profile-item" style="margin: 0;">
+                                                        <a class="nav-link" id="profile"><i class="fa-regular fa-user"></i></a>
+                                                        <div id="pop-up" style="display: none;">
+                                                            <a href="/user/profile">Update Address</a>
+                                                            <a href="/user/orders">View Past Orders</a>
+                                                        </div>
+                                                    </li>
+                                                    <li class="nav-item hidden" style="display: none;">
+                                                        <a href="/user/profile"
+                                                            class="nav-link">Update Address</a>
+                                                    </li>
+                                                    <li class="nav-item hidden" style="display: none;">
+                                                        <a href="/user/orders" class="nav-link">View Past Orders</a>
+                                                    </li>
+                                                    <% }%>
+                                                       
+                                                                      <% if(isAuth) {%>
+                                                                            <li class="nav-item">
+                                                                                <a href="/view-products"
+                                                                                    class="nav-link">View Products</a>
+                                                                            </li>
+                                                                            <% }%>
+                                                                                <% if(isAdmin) {%>
+                                                                                    <li class="nav-item">
+                                                                                        <a href="/admin/add-product"
+                                                                                            class="nav-link">Add Product</a>
+                                                                                    </li>
+                                                                                    <% }%>
+                                                                                        <% if(isAdmin) {%>
+                                                                                            <li class="nav-item">
+                                                                                                <a href="/admin/orders"
+                                                                                                    class="nav-link">View
+                                                                                                    Orders</a>
+                                                                                            </li>
+                                                                                            <% }%>
+                    </ul>
+
                    
-                        <div id="cart-box">
-                            <i class="fa-solid fa-cart-shopping cart"></i>
-                            <span class="product-num">
-                                <p id="product-num">0</p>
-                            </span>
-                        </div>
-              
-                        <!-- <object data="/images/cartIcon.svg" type="image/svg+xml">No Support</object> -->
-                    </a>
-                </li>
-              </div>
+                        <% if(isAuth && !isAdmin) {%>
+                            <ul class="center-nav navbar-nav" style="display: flex; justify-content: right; width: 33%;">
+                            <li class="nav-item" style="width: 100% !important;">
+                                <form action="/products/search" method="get" class="Search">
+                                    <input type="text" name="prefix">
+                                    <button class="searchbutton"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                </form>
+                            </li>
+                        </ul>
+                        <% }%>
+                    
+                   
+                    <ul class="right-nav navbar-nav" style="display: flex; justify-content: right; width: 33%;">
+                        <% if(isAuth) {%>
+                            <li class="nav-item">
+                                <a href="/logout" class="nav-link">Log Out</a>
+                            </li>
+                            <% }%>
+                            <% if(isAuth && !isAdmin) {%>
+                                <li class="nav-item cart-box-item">
+                                    <a href="/user/cart" class="nav-link" id="cart-box"> 
+                                            <i class="fa-solid fa-cart-shopping cart"></i>
+                                            <span class="product-num">
+                                                <p id="product-num">1</p>
+                                            </span>
+    
+                                        <!-- <object data="/images/cartIcon.svg" type="image/svg+xml">No Support</object> -->
+                                    </a>
+                                </li>
+                            <%}%>
+                    </ul>
+                </ul>
             </div>
-        
+        </div>
+
     </nav>
 </header>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous" defer></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"
+    defer></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+    integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"
+    defer></script>
+<script defer>
+    let toggle = 1;
+    let profile= document.getElementById("profile");
+    let popup = document.getElementById("pop-up");
+    function handleClick(event){
+        if(toggle)
+            popup.style.display = "flex";
+        else 
+            popup.style.display = "none";
+        toggle = !toggle;
+    }
+    profile.addEventListener("click",handleClick)
+    let body = document.querySelector("body");
+    body.addEventListener("click",(event)=>{
+        if(!profile.contains(event.target))
+        popup.style.display = "none";
+    })
+</script>

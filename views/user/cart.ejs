@@ -11,16 +11,16 @@
     <%-include("../includes/header") %>
 
         <main>
-            <div class="card card">
-                <div class="card__content row g-0">
+            <h5 style="text-align: center;display:none; position: relative; margin-top: 0 !important; margin-bottom: 5rem !important;" id="NoItems">No Items in Cart</h5>
+            <%if(isAuth && Products.length){%>
+            <div class="card Card" style="width: 45rem;  margin-left: auto !important; margin-right: auto !important;margin-top: 2rem; margin-bottom: 4rem !important;">
+               
             <% for(Product of Products) { %>
                 <div class="cart-item">
-                    <div class="col-md-4">
-                        <img src="../<%=Product.actualProduct.imageUrl%>" alt="Image">
+                    <div class="col-md-4" style="background-image: url('../<%=Product.actualProduct.imageUrl%>'); height: 15rem; background-size: contain; background-repeat: no-repeat; background-position: center;">
                     </div>
-                    <div class="col-md-4">
-                        <div class="card-body">
-                            <ul>
+                   
+                            <ul style="list-style-type: none; padding-left: 0;">
                                 <li>
                                     <h3>
                                         <%=Product.actualProduct.name%> 
@@ -39,22 +39,30 @@
                                 </li>
                                 <li>
                                     <p>
-                                        Quantity: <em id="product-num-<%=Product.actualProduct._id%>"><%=Product.number%></em> <button class="quantity plus"  data-userid="<%=userId%>" data-csrfToken="<%=csrfToken%>" data-productId="<%=Product.actualProduct._id%>"  >+</button> <button class="quantity minus" data-userid="<%=userId%>" data-csrfToken="<%=csrfToken%>" data-productId="<%=Product.actualProduct._id%>">-</button>
+                                        Quantity: <span id="product-num-<%=Product.actualProduct._id%>"><%=Product.number%></span> <button class="quantity plus btn-primary"  data-userid="<%=userId%>" data-csrfToken="<%=csrfToken%>" data-productId="<%=Product.actualProduct._id%>"  >+</button> 
+                                        <button class="quantity minus btn-primary" data-userid="<%=userId%>" data-csrfToken="<%=csrfToken%>" data-productId="<%=Product.actualProduct._id%>">-</button>
                                     </p>
                                 </li>
                             </ul>
-                        </div>
-                    </div>
+        
                 </div>
                         <% } %>
-                    <h4>Total Price: <em  id="totalPrice"><%=totalPrice%></em> rupees 
-                        <%if(isAuth && Products.length){%>
+
+                       
+                            <h4>Total Price: <span  id="totalPrice"><%=totalPrice%></span> rupees
                             <form id ="buyform"  action="../user/buy" method="post">
                                 <input type="hidden" name="_csrf" value="<%=csrfToken%>">
-                                <button class="btn btn-primary">Buy Products</button>
+                                <button class="btn btn-primary" style="margin-top: 0.5rem;">Buy Products</button>
                             </form>
+                        </h4>
+                        </div>
+                        <%}else if(!Products.length){%>
+                            <h5 style="text-align: center; margin-top:2rem;">No Items in Cart</h5>
+                        <%} else{%>
+                            <h5 style="text-align: center; ">Please Sign in to view Cart</h5>
                         <%}%>
-                    </h4>
-                </div>
-                </div>
+                    
+             
         </main>
+
+<%-include("../includes/footer")%>

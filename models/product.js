@@ -18,6 +18,23 @@ class Product{
         const Products = await getDb().collection("Products").find().toArray();
         return Products;
     }
+    
+    static async fetchFilter(str){
+        const Products = await getDb().collection("Products").find().toArray();
+        let words_search = str.split(' ');
+        let filtered = Products.filter((product) => {
+            let words_product= product.name.split(' ');
+            for(let i of words_search){
+                for(let j of words_product){
+                    if(i.toLowerCase() == j.toLowerCase()) 
+                        return true;
+                }
+            }
+            return false;
+        })
+
+        return filtered;
+    }
  
     static async fetch(id){
         return await getDb().collection("Products").findOne({_id: new ObjectId(id)});
